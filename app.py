@@ -1,13 +1,21 @@
+import requests
+import polyline
+from flask import jsonify
+from flask import Flask
+from flask import request
+from flask_restful import reqparse, abort, Api, Resource
+from flask_cors import CORS
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 import time
-import requests
 import os
 
+app = Flask(__name__)
+CORS(app)
 
+@app.route('/reminder',methods=['GET'])
 def main():
-
 
     chrome_options = webdriver.ChromeOptions()
     chrome_options.binary_location = os.environ.get("/app/.apt/usr/bin/google-chrome")
@@ -73,5 +81,11 @@ def main():
     
 
     
+    return jsonify("Success")
 
-main()
+
+
+
+
+if __name__ == '__main__':
+   app.run()
